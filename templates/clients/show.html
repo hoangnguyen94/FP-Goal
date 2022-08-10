@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="bg"></div>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <ul class="list-group no-hover" id="messages">
+        <li class="list-group-item">
+          <a href="{{url_for('client_show', client_id=client.user.id) }}">{{ client.name }}</a>
+          <div class="client-area">
+            <div class="client-heading">
+              <a href="/clients/{{ client.user.id }}">@{{ client.user.name }}</a>
+              {% if g.user %}
+                {% if g.user.id == client.user.id %}
+                  <form method="POST"
+                        action="/client/{{ client.id }}/delete">
+                    <button class="btn btn-outline-danger">Delete</button>
+                  </form>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+{% endblock %}
